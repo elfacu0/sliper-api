@@ -1,5 +1,5 @@
 import pytest
-from scrapper import get_soup, get_channel_name, get_channel_subscribers
+from scrapper import get_soup, get_channel_name, get_channel_subscribers, get_channel_views
 from models import Channel
 
 
@@ -27,3 +27,7 @@ class TestGetChannel:
     def test_get_subscribers(self):
         subscribers = get_channel_subscribers(mock_channel_soup)
         assert subscribers == channel.subscribers
+
+    def test_get_views(self):
+        views = get_channel_views(mock_channel_soup)
+        assert views == channel.views
