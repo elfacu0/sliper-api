@@ -1,5 +1,5 @@
 import pytest
-from scrapper import get_soup, get_channel_name, get_channel_subscribers, get_channel_views
+from scrapper import get_soup, get_channel_name, get_channel_subscribers, get_channel_views, get_channel_join_date
 from models import Channel
 
 
@@ -13,11 +13,13 @@ channel = Channel(name="Muzska89", join_date="Mar 16, 2009",
                   subscribers="609K", views=151415059)
 BASE_URL = "https://www.youtube.com/"
 
+
 @pytest.fixture
 def mock_channel_soup():
     channelId = "@Muzska89"
     url = BASE_URL + channelId + "/about"
     return get_soup(url)
+
 
 class TestGetChannel:
     def test_get_name(self):
@@ -31,3 +33,7 @@ class TestGetChannel:
     def test_get_views(self):
         views = get_channel_views(mock_channel_soup)
         assert views == channel.views
+
+    def test_get_join_date(self):
+        join_date = get_channel_join_date(mock_channel_soup)
+        assert join_date == channel.join_date
