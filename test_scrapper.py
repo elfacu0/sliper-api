@@ -1,15 +1,19 @@
 import pytest
-from scrapper import get_soup,get_channel_name
+from scrapper import get_soup, get_channel_name
 from models import Channel
+
 
 class MockChannel:
     @staticmethod
     def urlopen():
         return open("fixtures/channel_fixture.txt", "r")
 
-channel = Channel(name="Muzska89", subscribers="609K", views=151415059)
+
+channel = Channel(name="Muzska89", join_date="Mar 16, 2009",
+                  subscribers="609K", views=151415059)
 URL = "https://www.youtube.com/"
 channelId = "@Muzska89"
+
 
 class TestGetChannel:
     def test_get_name(self):
