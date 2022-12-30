@@ -1,5 +1,5 @@
 import pytest
-from scrapper import get_soup, get_channel_name
+from scrapper import get_soup, get_channel_name, get_channel_subscribers
 from models import Channel
 
 
@@ -11,13 +11,19 @@ class MockChannel:
 
 channel = Channel(name="Muzska89", join_date="Mar 16, 2009",
                   subscribers="609K", views=151415059)
-URL = "https://www.youtube.com/"
-channelId = "@Muzska89"
+BASE_URL = "https://www.youtube.com/"
 
+@pytest.fixture
+def mock_channel_soup():
+    channelId = "@Muzska89"
+    url = BASE_URL + channelId + "/about"
+    return get_soup(url)
 
 class TestGetChannel:
     def test_get_name(self):
-        url = URL + channelId + "/about"
-        soup = get_soup(url)
-        name = get_channel_name(soup)
+        name = get_channel_name(mock_channel_soup)
         assert name == channel.name
+
+    def test_get_subscribers(self):
+        subscribers = get_channel_subscribers(mock_channel_soup)
+        assert subscribers == channel.subscribers
