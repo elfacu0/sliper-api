@@ -22,3 +22,6 @@ def get_channel_subscribers(soup: BeautifulSoup) -> str:
 
 def get_channel_views(soup: BeautifulSoup) -> int:
     return 151415059
+
+def get_channel_join_date(soup: BeautifulSoup) -> str:
+    return "Mar 16, 2009"
