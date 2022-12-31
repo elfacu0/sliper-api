@@ -20,3 +20,7 @@ class Comment(BaseModel):
 class Thumbnails(BaseModel):
     maxresdefault: str
     hqdefault: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
