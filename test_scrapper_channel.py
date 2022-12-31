@@ -20,12 +20,12 @@ def mock_channel_soup():
 
 
 class TestGetChannel:
-    def test_get_name(self,monkeypatch):
+    def test_get_name(self, monkeypatch):
         monkeypatch.setattr(request, "urlopen", mock_urlopen)
         name = get_channel_name(mock_channel_soup())
         assert name == channel.name
 
-    def test_get_subscribers(self,monkeypatch):
+    def test_get_subscribers(self, monkeypatch):
         monkeypatch.setattr(request, "urlopen", mock_urlopen)
         subscribers = get_channel_subscribers(mock_channel_soup())
         assert subscribers == channel.subscribers
@@ -35,12 +35,12 @@ class TestGetChannel:
         views = get_channel_views(mock_channel_soup())
         assert views == channel.views
 
-    def test_get_join_date(self,monkeypatch):
+    def test_get_join_date(self, monkeypatch):
         monkeypatch.setattr(request, "urlopen", mock_urlopen)
         join_date = get_channel_join_date(mock_channel_soup())
         assert join_date == channel.join_date
 
-    def test_get_channel_data(self,monkeypatch):
+    def test_get_channel_data(self, monkeypatch):
         monkeypatch.setattr(request, "urlopen", mock_urlopen)
         res_channel = get_channel_data(channel_id)
         assert res_channel == channel
