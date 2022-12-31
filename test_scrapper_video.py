@@ -9,12 +9,13 @@ def mock_urlopen(url: str):
 
 
 video = Video(title="PONIENDO A PARIR FALLOUT 4",
-              upload_date="2015-11-19", views="2,493,264", likes="71,233")
+              upload_date="19 nov 2015", views="2,493,264", likes="71,233")
 BASE_URL = "https://www.youtube.com/"
 video_id = "1vQuHvXX550"
 
+
 def mock_channel_soup():
-    url = BASE_URL + "watch?v="+ video_id
+    url = BASE_URL + "watch?v=" + video_id
     return get_soup(url)
 
 
@@ -38,3 +39,8 @@ class TestGetChannel:
         monkeypatch.setattr(request, "urlopen", mock_urlopen)
         likes = get_video_likes(mock_channel_soup())
         assert likes == video.likes
+
+    def test_get_video_data(self, monkeypatch):
+        monkeypatch.setattr(request, "urlopen", mock_urlopen)
+        res_video = get_video_data(video_id)
+        assert res_video == video
