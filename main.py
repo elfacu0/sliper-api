@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from models import Channel
-from scrapper import get_channel_data
+from models import Channel, Video, Comment
+from scrapper import get_channel_data, get_video_data
 
 description = """
 Sliper API allows you to get all data about youtube channels and videos
@@ -47,20 +47,19 @@ def read_root():
 
 @app.get("/channel/{channel_id}", tags=["channel"], response_model=Channel)
 def get_channel(channel_id: str):
-    channel = get_channel_data(channel_id)
-    return channel
+    return get_channel_data(channel_id)
 
 
-@ app.get("/video/{video_id}", tags=["video"])
-async def get_video_data(video_id: str):
-    return
+@ app.get("/video/{video_id}", tags=["video"], response_model=Video)
+def get_video_stats(video_id: str):
+    return get_video_data(video_id)
 
 
-@ app.get("/video/comments/{video_id}", tags=["video"])
-async def get_video_comments(video_id: str):
-    return
+# @ app.get("/video/comments/{video_id}", tags=["video"], response_model=[Comment])
+# def get_video_comments(video_id: str):
+#     return
 
 
-@ app.get("/video/thumbnail/{video_id}", tags=["video"])
-async def get_video_thumbnail(video_id: str):
-    return
+# @ app.get("/video/thumbnail/{video_id}", tags=["video"])
+# def get_video_thumbnail(video_id: str):
+#     return
