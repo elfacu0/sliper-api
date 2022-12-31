@@ -128,3 +128,7 @@ def get_video_data(id: str) -> Video:
     video = Video(title=get_video_title(soup), upload_date=get_video_date(
         soup), views=get_video_views(soup), likes=get_video_likes(soup))
     return video
+
+
+def get_video_thumbnails_json(id: str) -> str:
+    return {'maxresdefault': f'https://i.ytimg.com/vi/{id}/maxresdefault.jpg', "hqdefault": f'https://i.ytimg.com/vi/{id}/hqdefault.jpg'}

@@ -16,3 +16,7 @@ class Comment(BaseModel):
     user: str
     body: str
     likes: str
+
+class Thumbnails(BaseModel):
+    maxresdefault: str
+    hqdefault: str

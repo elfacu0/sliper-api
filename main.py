@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from models import Channel, Video, Comment
-from scrapper import get_channel_data, get_video_data
+from models import Channel, Video, Comment, Thumbnails
+from scrapper import get_channel_data, get_video_data, get_video_thumbnails_json
 
 description = """
 Sliper API allows you to get all data about youtube channels and videos
@@ -60,6 +60,6 @@ def get_video_stats(video_id: str):
 #     return
 
 
-# @ app.get("/video/thumbnail/{video_id}", tags=["video"])
-# def get_video_thumbnail(video_id: str):
-#     return
+@ app.get("/video/thumbnail/{video_id}", tags=["video"], response_model=Thumbnails)
+def get_video_thumbnails(video_id: str):
+    return get_video_thumbnails_json(video_id)
