@@ -108,7 +108,7 @@ def get_video_thumbnails(video_id: str):
 
 
 def create_access_token() -> Token:
-    expire = datetime.utcnow() + timedelta(minutes=15)
+    expire = (datetime.utcnow() + timedelta(minutes=15)).timestamp()
     encoded_jwt = jwt.encode({"exp": expire}, SECRET_KEY, algorithm=ALGORITHM)
     token = Token(access_token=encoded_jwt, token_type="bearer")
     return token
@@ -117,8 +117,8 @@ def create_access_token() -> Token:
 def is_valid_token(jwt_token: str) -> bool:
     try:
         payload = jwt.decode(jwt_token, SECRET_KEY, algorithms=ALGORITHM)
-        exp = payload["exp"]
-        print(exp)
-        return True
+        exp_seconds = payload["exp"]
+        current_seconds = datetime.utcnow().timestamp()
+        return current_seconds < exp_seconds
     except JWTError:
         return False
