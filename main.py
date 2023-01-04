@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, status, Depends
-from models import Channel, Video, Comment, Thumbnails, Token
-from scrapper import get_channel_data, get_video_data, get_video_thumbnails_json
+from models import Channel, Video, Comment, Thumbnails, Token, Avatar
+from scrapper import get_channel_data, get_video_data, get_video_thumbnails_json, get_channel_avatar_data
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer
@@ -20,6 +20,8 @@ Get stats about youtube **Channel**.
 * Join Date
 * Views
 * Subscribers
+
+Get Channel Avatar
 
 ## Videos
 
@@ -111,6 +113,23 @@ def get_channel(channel_id: str, token: str = Depends(oauth2_scheme)):
         raise credentials_exception
     try:
         return get_channel_data(channel_id)
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Channel not found",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+
+@app.get("/channel/avatar/{channel_id}", tags=["Channel"], response_model=Avatar)
+def get_channel_avatar(channel_id: str, token: str = Depends(oauth2_scheme)):
+    """
+    Return avatar of the given Channel
+    """
+    if not is_valid_token(token):
+        raise credentials_exception
+    try:
+        return get_channel_avatar_data(channel_id)
     except:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

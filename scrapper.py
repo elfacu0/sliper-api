@@ -1,6 +1,6 @@
 import urllib.request as request
 from bs4 import BeautifulSoup
-from models import Channel, Video
+from models import Channel, Video, Avatar
 import json
 
 URL = "https://www.youtube.com/"
@@ -90,11 +90,14 @@ def get_channel_data(id: str) -> Channel:
     return channel
 
 
-def get_channel_avatar(soup: BeautifulSoup) -> str:
+def get_channel_avatar_data(id: str) -> str:
+    url = URL + id + "/about"
+    print(url)
+    soup = get_soup(url)
     script = soup.find_all("script")[33].text
     avatars = find_key(json.loads(
         script[19:-1]), "avatar")['thumbnails']
-    return avatars[-1]['url']
+    return Avatar(url=avatars[-1]['url'])
 
 
 def get_video_script_data(soup: BeautifulSoup):
