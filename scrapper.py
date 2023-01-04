@@ -71,7 +71,6 @@ def get_channel_views(soup: BeautifulSoup) -> str:
     str_views = find_key(json.loads(
         script[19:-1]), "viewCountText")["simpleText"]
     views = str_views.split(" ")[0]
-    print(views)
     return views
 
 
@@ -89,6 +88,13 @@ def get_channel_data(id: str) -> Channel:
     channel = Channel(name=get_channel_name(soup), join_date=get_channel_join_date(soup),
                       subscribers=get_channel_subscribers(soup), views=get_channel_views(soup))
     return channel
+
+
+def get_channel_avatar(soup: BeautifulSoup) -> str:
+    script = soup.find_all("script")[33].text
+    avatars = find_key(json.loads(
+        script[19:-1]), "avatar")['thumbnails']
+    return avatars[-1]['url']
 
 
 def get_video_script_data(soup: BeautifulSoup):
