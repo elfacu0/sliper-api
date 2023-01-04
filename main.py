@@ -92,6 +92,11 @@ def read_root():
     return {"Sliper": "Get youtube videos and channel data", "READ": "The docs for more information"}
 
 
+@app.get("/healthcheck")
+def read_root():
+    return {"status": "ok"}
+
+
 @ app.post("/token", response_model=Token)
 def login():
     return create_access_token()
@@ -169,7 +174,7 @@ def get_video_thumbnails(video_id: str):
     """
     Returns the thumbnail of the given video in various sizes
 
-    You don't need use a token in this one
+    You don't need a token for this one
     """
     return get_video_thumbnails_json(video_id)
 
