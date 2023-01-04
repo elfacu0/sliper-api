@@ -9,7 +9,7 @@ With Sliper API you can easily retrieve information about specific YouTube video
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/elfacu0/sliper-api
 ```
 
 Go to the project directory
@@ -45,4 +45,4 @@ To run tests, run the following command
 
 ## Tech Stack
 
-Uvicorn, FastApi, BeautifulSoup
+Uvicorn, FastApi, Docker,  BeautifulSoup
