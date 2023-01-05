@@ -78,8 +78,8 @@ app = FastAPI(title="Sliper",
               description=description,
               version="0.0.1",
               contact={
-                      "name": "Gitlab",
-                      "url": "http://x-force.example.com/contact/",
+                      "name": "Github",
+                      "url": "https://github.com/elfacu0/sliper-api",
               },
               openapi_tags=tags_metadata)
 
