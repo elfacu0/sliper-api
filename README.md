@@ -1,4 +1,5 @@
 # Sliper API
+![workflow](https://github.com/elfacu0/sliper-api/actions/workflows/main.yml/badge.svg)
 
 With Sliper API you can easily retrieve information about specific YouTube videos and channels, including the number of likes, views, and subscribers, as well as the title and name of the video or channel. This information can be used in a variety of ways, such as to display the most popular videos or channels, or to track the performance of a particular video or channel over time.
 
